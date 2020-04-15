@@ -1059,7 +1059,7 @@ def _create_local_cuda_repository(repository_ctx):
                        "cudnn_cnn_train.h",
                        "cudnn_ops_infer.h",
                        "cudnn_ops_train.h",
-                       "cudnn.h",
+                       "cudnn.h",          
                        "cudnn_version.h",
                       ]
 
@@ -1072,8 +1072,8 @@ def _create_local_cuda_repository(repository_ctx):
     copy_rules.append(make_copy_files_rule(
         repository_ctx,
         name = "cudnn-include",
-        srcs = [cudnn_header_dir + "/cudnn.h"],
-        outs = ["cudnn/include/cudnn.h"],
+        srcs = cudnn_srcs,
+        outs = cudnn_outs,
     ))
 
     # Set up BUILD file for cuda/
