@@ -2333,7 +2333,6 @@ port::StatusOr<cudnnConvolutionFwdAlgo_t> GetCudnnConvolutionForwardAlgo(
   size_t mem_limit = specify_workspace_limit ? memory_limit_bytes : 0ULL;
   for (int r = 0; r < num_returned_algos; r++) {
     if (perf_results[r].status == CUDNN_STATUS_SUCCESS &&
-        perf_results[r].algo != CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED &&
         perf_results[r].memory <= mem_limit) {
       return perf_results[r].algo;
     }
@@ -2350,6 +2349,7 @@ port::StatusOr<cudnnConvolutionFwdAlgo_t> GetCudnnConvolutionForwardAlgo(
       cudnn.handle(), input_nd.handle(), filter.handle(), conv.handle(),
       output_nd.handle(), preference, memory_limit_bytes, &algo_to_use));
   return algo_to_use;
+#endif
 }
 
 port::StatusOr<cudnnConvolutionBwdDataAlgo_t>
@@ -2360,8 +2360,6 @@ GetCudnnConvolutionBackwardDataAlgo(const CudnnHandle& cudnn,
                                     const CudnnTensorDescriptor& output_nd,
                                     bool specify_workspace_limit,
                                     size_t memory_limit_bytes) {
-<<<<<<< HEAD
-=======
 #if CUDNN_VERSION >= 8000
   const int num_requested_algos = 5;
   int num_returned_algos = 0;
@@ -2375,8 +2373,6 @@ GetCudnnConvolutionBackwardDataAlgo(const CudnnHandle& cudnn,
   size_t mem_limit = specify_workspace_limit ? memory_limit_bytes : 0ULL;
   for (int r = 0; r < num_returned_algos; r++) {
     if (perf_results[r].status == CUDNN_STATUS_SUCCESS &&
-        perf_results[r].algo !=
-            CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD_NONFUSED &&
         perf_results[r].memory <= mem_limit) {
       return perf_results[r].algo;
     }
@@ -2385,7 +2381,6 @@ GetCudnnConvolutionBackwardDataAlgo(const CudnnHandle& cudnn,
                       "cudnnGetConvolutionBackwardDataAlgorithm_v7 returned "
                       "no suitable algorithms. This could be a cudnn bug.");
 #else
->>>>>>> 8a5db25ae76... Filter out WINOGRAD_NONFUSED cudnn Get v7 results
   cudnnConvolutionBwdDataPreference_t preference =
       specify_workspace_limit
           ? CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT
@@ -2395,6 +2390,7 @@ GetCudnnConvolutionBackwardDataAlgo(const CudnnHandle& cudnn,
       cudnn.handle(), filter.handle(), output_nd.handle(), conv.handle(),
       input_nd.handle(), preference, memory_limit_bytes, &algo_to_use));
   return algo_to_use;
+#endif
 }
 
 port::StatusOr<cudnnConvolutionBwdFilterAlgo_t>
@@ -2405,8 +2401,6 @@ GetCudnnConvolutionBackwardFilterAlgo(const CudnnHandle& cudnn,
                                       const CudnnTensorDescriptor& output_nd,
                                       bool specify_workspace_limit,
                                       size_t memory_limit_bytes) {
-<<<<<<< HEAD
-=======
 #if CUDNN_VERSION >= 8000
   const int num_requested_algos = 5;
   int num_returned_algos = 0;
@@ -2419,8 +2413,6 @@ GetCudnnConvolutionBackwardFilterAlgo(const CudnnHandle& cudnn,
   size_t mem_limit = specify_workspace_limit ? memory_limit_bytes : 0ULL;
   for (int r = 0; r < num_returned_algos; r++) {
     if (perf_results[r].status == CUDNN_STATUS_SUCCESS &&
-        perf_results[r].algo !=
-            CUDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED &&
         perf_results[r].memory <= mem_limit) {
       return perf_results[r].algo;
     }
@@ -2429,7 +2421,6 @@ GetCudnnConvolutionBackwardFilterAlgo(const CudnnHandle& cudnn,
                       "cudnnGetConvolutionBackwardFilterAlgorithm_v7 returned "
                       "no suitable algorithms. This could be a cudnn bug.");
 #else
->>>>>>> 8a5db25ae76... Filter out WINOGRAD_NONFUSED cudnn Get v7 results
   cudnnConvolutionBwdFilterPreference_t preference =
       specify_workspace_limit
           ? CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT
@@ -2439,6 +2430,7 @@ GetCudnnConvolutionBackwardFilterAlgo(const CudnnHandle& cudnn,
       cudnn.handle(), input_nd.handle(), output_nd.handle(), conv.handle(),
       filter.handle(), preference, memory_limit_bytes, &algo_to_use));
   return algo_to_use;
+#endif
 }
 
 port::StatusOr<DeviceMemory<uint8>> AllocateCudnnConvolutionForwardWorkspace(
