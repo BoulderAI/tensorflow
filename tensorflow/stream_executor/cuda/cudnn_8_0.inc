@@ -1246,8 +1246,6 @@ cudnnGetConvolutionForwardAlgorithmMaxCount(cudnnHandle_t handle, int *count) {
 }
 
 cudnnStatus_t CUDNNWINAPI
-<<<<<<< HEAD
-=======
 cudnnGetConvolutionForwardAlgorithm(cudnnHandle_t handle,
                                     const cudnnTensorDescriptor_t xDesc,
                                     const cudnnFilterDescriptor_t wDesc,
@@ -1263,7 +1261,6 @@ cudnnGetConvolutionForwardAlgorithm(cudnnHandle_t handle,
 }
 
 cudnnStatus_t CUDNNWINAPI
->>>>>>> fb68e31b3e2... Basic CUDNN8 support
 cudnnGetConvolutionForwardAlgorithm_v7(cudnnHandle_t handle,
                                        const cudnnTensorDescriptor_t srcDesc,
                                        const cudnnFilterDescriptor_t filterDesc,
@@ -1444,8 +1441,6 @@ cudnnFindConvolutionBackwardDataAlgorithmEx(cudnnHandle_t handle,
 }
 
 cudnnStatus_t CUDNNWINAPI
-<<<<<<< HEAD
-=======
 cudnnGetConvolutionBackwardDataAlgorithm(cudnnHandle_t handle,
                                          const cudnnFilterDescriptor_t wDesc,
                                          const cudnnTensorDescriptor_t dyDesc,
@@ -1461,7 +1456,6 @@ cudnnGetConvolutionBackwardDataAlgorithm(cudnnHandle_t handle,
 }
 
 cudnnStatus_t CUDNNWINAPI
->>>>>>> fb68e31b3e2... Basic CUDNN8 support
 cudnnGetConvolutionBackwardDataAlgorithm_v7(cudnnHandle_t handle,
                                             const cudnnFilterDescriptor_t filterDesc,
                                             const cudnnTensorDescriptor_t diffDesc,
@@ -2662,8 +2656,6 @@ cudnnFindConvolutionBackwardFilterAlgorithmEx(cudnnHandle_t handle,
 }
 
 cudnnStatus_t CUDNNWINAPI
-<<<<<<< HEAD
-=======
 cudnnGetConvolutionBackwardFilterAlgorithm(cudnnHandle_t handle,
                                            const cudnnTensorDescriptor_t xDesc,
                                            const cudnnTensorDescriptor_t dyDesc,
@@ -2679,7 +2671,6 @@ cudnnGetConvolutionBackwardFilterAlgorithm(cudnnHandle_t handle,
 }
 
 cudnnStatus_t CUDNNWINAPI
->>>>>>> fb68e31b3e2... Basic CUDNN8 support
 cudnnGetConvolutionBackwardFilterAlgorithm_v7(cudnnHandle_t handle,
                                               const cudnnTensorDescriptor_t srcDesc,
                                               const cudnnTensorDescriptor_t diffDesc,
