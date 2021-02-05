@@ -59,7 +59,7 @@ def check_cuda_lib(path, check_soname=True):
   objdump = which("objdump")
   if check_soname and objdump is not None and not _is_windows():
     # Decode is necessary as in py3 the return type changed from str to bytes
-    output = subprocess.check_output([objdump, "-p", path]).decode("ascii")
+    output = subprocess.check_output([objdump, "-p", path]).decode("utf-8")
     output = [line for line in output.splitlines() if "SONAME" in line]
     sonames = [line.strip().split(" ")[-1] for line in output]
     if not any([soname == os.path.basename(path) for soname in sonames]):
@@ -70,7 +70,7 @@ def main():
   try:
     args = [argv for argv in sys.argv[1:]]
     if len(args) % 2 == 1:
-      raise ConfigError("Expected even number of arguments")
+      raise ConfigError("Expected even number of arguments found {}".format(args))
     checked_paths = []
     for i in range(0, len(args), 2):
       path = args[i]

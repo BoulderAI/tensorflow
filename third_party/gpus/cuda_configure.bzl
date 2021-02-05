@@ -572,7 +572,7 @@ def _find_libs(repository_ctx, check_cuda_libs_script, cuda_config):
             static = False,
         ),
     }
-
+    print("cudnn_version {} check_cuda_libs_params.values()={}".format(cuda_config.cudnn_version,check_cuda_libs_params.values()))
     # Verify that the libs actually exist at their locations.
     _check_cuda_libs(repository_ctx, check_cuda_libs_script, check_cuda_libs_params.values())
 
