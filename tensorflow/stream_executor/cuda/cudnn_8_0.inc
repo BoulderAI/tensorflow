@@ -2611,21 +2611,6 @@ cudnnFindConvolutionBackwardFilterAlgorithmEx(cudnnHandle_t handle,
 }
 
 cudnnStatus_t CUDNNWINAPI
-cudnnGetConvolutionBackwardFilterAlgorithm(cudnnHandle_t handle,
-                                           const cudnnTensorDescriptor_t xDesc,
-                                           const cudnnTensorDescriptor_t dyDesc,
-                                           const cudnnConvolutionDescriptor_t convDesc,
-                                           const cudnnFilterDescriptor_t dwDesc,
-                                           cudnnConvolutionBwdFilterPreference_t preference,
-                                           size_t memoryLimitInBytes,
-                                           cudnnConvolutionBwdFilterAlgo_t *algo) {
-  using FuncPtr = cudnnStatus_t (CUDNNWINAPI *)(cudnnHandle_t, const cudnnTensorDescriptor_t, const cudnnTensorDescriptor_t, const cudnnConvolutionDescriptor_t, const cudnnFilterDescriptor_t, cudnnConvolutionBwdFilterPreference_t, size_t, cudnnConvolutionBwdFilterAlgo_t *);
-  static auto func_ptr = LoadSymbol<FuncPtr>("cudnnGetConvolutionBackwardFilterAlgorithm");
-  if (!func_ptr) return GetSymbolNotFoundError();
-  return func_ptr(handle, xDesc, dyDesc, convDesc, dwDesc, preference, memoryLimitInBytes, algo);
-}
-
-cudnnStatus_t CUDNNWINAPI
 cudnnGetConvolutionBackwardFilterAlgorithm_v7(cudnnHandle_t handle,
                                               const cudnnTensorDescriptor_t srcDesc,
                                               const cudnnTensorDescriptor_t diffDesc,
