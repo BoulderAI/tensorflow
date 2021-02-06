@@ -3,7 +3,6 @@
 load("//third_party/gpus:cuda_configure.bzl", "cuda_configure")
 load("//third_party/gpus:rocm_configure.bzl", "rocm_configure")
 load("//third_party/tensorrt:tensorrt_configure.bzl", "tensorrt_configure")
-load("//third_party/nccl:nccl_configure.bzl", "nccl_configure")
 load("//third_party/mkl:build_defs.bzl", "mkl_repository")
 load("//third_party/git:git_configure.bzl", "git_configure")
 load("//third_party/py:python_configure.bzl", "python_configure")
@@ -70,7 +69,6 @@ def tf_repositories(path_prefix = "", tf_repo_name = ""):
     cc_download_clang_toolchain(name = "local_config_download_clang")
     cuda_configure(name = "local_config_cuda")
     tensorrt_configure(name = "local_config_tensorrt")
-    nccl_configure(name = "local_config_nccl")
     git_configure(name = "local_config_git")
     sycl_configure(name = "local_config_sycl")
     syslibs_configure(name = "local_config_syslibs")
@@ -621,18 +619,6 @@ def tf_repositories(path_prefix = "", tf_repo_name = ""):
         urls = [
             "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/snappy/archive/1.1.7.tar.gz",
             "https://github.com/google/snappy/archive/1.1.7.tar.gz",
-        ],
-    )
-
-    tf_http_archive(
-        name = "nccl_archive",
-        build_file = clean_dep("//third_party:nccl/archive.BUILD"),
-        patch_file = clean_dep("//third_party/nccl:archive.patch"),
-        sha256 = "9a7633e224982e2b60fa6b397d895d20d6b7498e3e02f46f98a5a4e187c5a44c",
-        strip_prefix = "nccl-0ceaec9cee96ae7658aa45686853286651f36384",
-        urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/nvidia/nccl/archive/0ceaec9cee96ae7658aa45686853286651f36384.tar.gz",
-            "https://github.com/nvidia/nccl/archive/0ceaec9cee96ae7658aa45686853286651f36384.tar.gz",
         ],
     )
 
