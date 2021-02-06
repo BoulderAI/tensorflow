@@ -29,7 +29,6 @@ limitations under the License.
 #include "absl/strings/str_join.h"
 #include "absl/types/optional.h"
 #include "absl/types/span.h"
-#include "third_party/nccl/nccl.h"
 #include "tensorflow/compiler/xla/refcounting_hash_map.h"
 #include "tensorflow/compiler/xla/service/hlo_casting_utils.h"
 #include "tensorflow/compiler/xla/service/hlo_instructions.h"
@@ -62,14 +61,10 @@ namespace gpu {
 // destroyed.
 
 /* static */ bool NcclAllReduceThunk::NcclIsEnabled() {
-#if GOOGLE_CUDA
-  return true;
-#else
   return false;
-#endif
 }
 
-#if GOOGLE_CUDA
+#if GOOGLE_CUDA_NCCL_ENABLED
 namespace {
 
 using tensorflow::BlockingCounter;
